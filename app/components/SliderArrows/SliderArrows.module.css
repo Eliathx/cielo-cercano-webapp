@@ -1,0 +1,23 @@
+.tooltipNextArrow, .tooltipPrevArrow {
+    cursor: pointer;
+    transition: var(--transition-duration) var(--transition-timing);
+    position: absolute;
+    z-index: var(--z-index);
+    bottom: 0;
+}
+  
+.tooltipPrevArrow:hover {
+transform: translateX(-6px);
+color: var(--accent);
+}
+
+.tooltipNextArrow:hover {
+transform: translateX(6px);
+color: var(--accent);
+}
+.tooltipNextArrow{
+right: 0;
+}
+.tooltipPrevArrow{
+left: 0;
+}

@@ -53,7 +53,7 @@ export const NeoDataProvider = ({ children }) => {
   const [filteredNeoData, setFilteredNeoData] = useState([]); // Datos filtrados
   const [selectedNeoData, setSelectedNeoData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const { filters } = useFilterSettings(); // Obtén los filtros desde el contexto
+  const { filters } = useFilterSettings(); 
 
   // Fetch API
   const fetchNEOs = async () => {
@@ -64,7 +64,6 @@ export const NeoDataProvider = ({ children }) => {
       const nearEarthObjects = Object.values(response.data.near_earth_objects).flat();
       const positionedNEOs = prepareData(nearEarthObjects);
 
-      // Almacenar los datos sin filtrar
       setNeoData(positionedNEOs);
       setLoading(false);
     } catch (error) {
@@ -73,12 +72,12 @@ export const NeoDataProvider = ({ children }) => {
     }
   };
 
-  // Aplicar filtros cuando cambien los filtros
+  // aplicar filtros cuando cambien los filtros
   useEffect(() => {
-    // Aplicar los filtros sobre los datos sin filtrar
+    // aplicar los filtros sobre los datos sin filtrar
     const filteredNEOs = applyFilters(neoData, filters);
-    setFilteredNeoData(filteredNEOs); // Actualizar los datos filtrados
-  }, [filters, neoData]); // Vuelve a aplicar los filtros cuando cambien los datos o los filtros
+    setFilteredNeoData(filteredNEOs); 
+  }, [filters, neoData]); 
 
   useEffect(() => {
     fetchNEOs();

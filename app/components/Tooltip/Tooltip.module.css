@@ -6,11 +6,11 @@
   bottom: 6rem;
   left: 2rem;
   padding: var(--padding-large);
+  padding-bottom: calc(var(--padding-large) + 0.5rem);
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   backdrop-filter: blur(var(--blur));
-  color: white;
   z-index: var(--z-index);
   transition: opacity var(--transition-duration) var(--transition-timing);
   width: 22rem;
@@ -24,17 +24,4 @@
 
 .tooltipSubtitle h3 {
   font-weight: normal;
-}
-
-.tooltipNextArrow, .tooltipPrevArrow {
-  cursor: pointer;
-  transition: var(--transition-duration) var(--transition-timing);
-}
-
-.tooltipPrevArrow:hover {
-  transform: translateX(-6px);
-}
-
-.tooltipNextArrow:hover {
-  transform: translateX(6px);
 }

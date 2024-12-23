@@ -5,65 +5,11 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { useNeoData } from "../../context/NeoDataContext";
 
-const TooltipNextArrow = ({ onClick}) => (
-  <div onClick={onClick} className={styles.tooltipNextArrow}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      >
-        <path
-          strokeDasharray="16"
-          strokeDashoffset="16"
-          d="M5 12h13.5"
-        >
-          <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0" />
-        </path>
-        <path
-          strokeDasharray="10"
-          strokeDashoffset="10"
-          d="M19 12l-5 5M19 12l-5 -5"
-        >
-          <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="10;0" />
-        </path>
-      </g>
-    </svg>
-  </div>
-);
+import { NextArrow, PrevArrow } from "../SliderArrows/SliderArrows";
 
-const TooltipPrevArrow = ({ onClick}) => (
-  <div onClick={onClick} className={styles.tooltipPrevArrow}>
-    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      >
-        <path
-          strokeDasharray="16"
-          strokeDashoffset="16"
-          d="M19 12h-13.5"
-        >
-          <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0" />
-        </path>
-        <path
-          strokeDasharray="10"
-          strokeDashoffset="10"
-          d="M5 12l5 5M5 12l5 -5"
-        >
-          <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.2s" dur="0.2s" values="10;0" />
-        </path>
-      </g>
-    </svg>
-  </div>
-);
+import { Xmark } from "iconoir-react";
 
-const Tooltip = () => {
+const Tooltip = ({setTooltipVisible}) => {
 
   const { selectedNeoData } = useNeoData();
 
@@ -72,13 +18,19 @@ const Tooltip = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    nextArrow: <TooltipNextArrow />,
-    prevArrow: <TooltipPrevArrow />,
+    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow />
   };
 
   return (
     <div className={styles.tooltip}>
+      <div style={{display:"flex", justifyContent:"space-between"}}>
       <h2>{selectedNeoData.name}</h2>
+        <div onClick={()=>{setTooltipVisible(false)}} style={{cursor:"pointer"}}>
+          <Xmark></Xmark>
+        </div>
+      </div>
+     
       <Slider {...settings}>
         <section>
           <div className={styles.tooltipSubtitle}>
@@ -94,6 +46,7 @@ const Tooltip = () => {
           </div>
           <p className='secondaryText'>{`${selectedNeoData.estimated_diameter.kilometers.estimated_diameter_min.toFixed(4)} - 
             ${selectedNeoData.estimated_diameter.kilometers.estimated_diameter_max.toFixed(4)}`} km</p>
+            
         </section>
         <section>
           <div className={styles.tooltipSubtitle}>
@@ -101,6 +54,8 @@ const Tooltip = () => {
             <p >Fecha de aproximamiento</p>
           </div>
           <p className='secondaryText'>{selectedNeoData.close_approach_data[0].close_approach_date}</p>
+          <br/>
+          <br/>
         </section>
         <section>
           <div className={styles.tooltipSubtitle}>

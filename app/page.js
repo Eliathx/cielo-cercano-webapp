@@ -31,7 +31,7 @@ export default function Home() {
             setTooltipVisible={setTooltipVisible} setIsLoadingVisible={setIsLoadingVisible}
           />
           <Tutorial />
-          {tooltipVisible && <Tooltip />}</> }
+          {tooltipVisible && <Tooltip setTooltipVisible={setTooltipVisible} />}</> }
           
           
         </>
