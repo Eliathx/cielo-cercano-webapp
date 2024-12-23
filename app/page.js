@@ -15,7 +15,6 @@ export default function Home() {
   useEffect(() => {
     if (!loading) {
       const timeout = setTimeout(() => {
-        console.log("voy a mostrar")
         setIsLoadingVisible(false);
       }, 500); 
       return () => clearTimeout(timeout);
@@ -26,15 +25,15 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-        <>
-          {isLoadingVisible ? <LoadingScreen isLoadingVisible={isLoadingVisible} /> : <> <SpaceCanvas
-            setTooltipVisible={setTooltipVisible} setIsLoadingVisible={setIsLoadingVisible}
-          />
-          <Tutorial />
-          {tooltipVisible && <Tooltip setTooltipVisible={setTooltipVisible} />}</> }
-          
-          
-        </>
+      {isLoadingVisible && <LoadingScreen isLoadingVisible={isLoadingVisible} />}
+
+      <div className={styles.content}>
+        <SpaceCanvas
+          setTooltipVisible={setTooltipVisible}
+        />
+        <Tutorial />
+        {tooltipVisible && <Tooltip setTooltipVisible={setTooltipVisible} />}
+      </div>
     </div>
   );
 }

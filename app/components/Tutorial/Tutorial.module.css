@@ -19,23 +19,10 @@
 
 .tutorialContent {
   text-align: center;
-  color: white;
+  color: var(--text);
   font-size: 18px;
 }
 
-.mouseIcon {
-  animation: bounce 1s infinite;
-  margin-bottom: 20px;
-}
-
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 
 .tutorialText p {
   margin: 5px 0;

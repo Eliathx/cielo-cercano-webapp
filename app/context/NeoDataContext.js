@@ -49,13 +49,13 @@ const applyFilters = (neoData, filters) => {
 };
 
 export const NeoDataProvider = ({ children }) => {
-  const [neoData, setNeoData] = useState([]); // Datos sin filtrar
-  const [filteredNeoData, setFilteredNeoData] = useState([]); // Datos filtrados
+  const [neoData, setNeoData] = useState([]); // datos sin filtrar
+  const [filteredNeoData, setFilteredNeoData] = useState([]); // datos filtrados
   const [selectedNeoData, setSelectedNeoData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { filters } = useFilterSettings(); 
 
-  // Fetch API
+  // fetch API
   const fetchNEOs = async () => {
     try {
       const url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2024-12-01&end_date=2024-12-07&api_key=${apiKey}`;

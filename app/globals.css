@@ -52,8 +52,8 @@ a {
 
 .neo-label {
   font-size: 12px;
-  color: white;
-  font-family: Arial, sans-serif;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
   text-align: center;
 }
 
@@ -110,3 +110,34 @@ a {
   scrollbar-color: var(--accent) var(--background-color); 
   scrollbar-width: thin; 
 }
+
+.loadingIcon, .mouseIcon {
+  animation: bounce 1s infinite linear; 
+  margin-bottom: 1rem;
+}
+
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+button {
+  all: unset;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--accent-border);
+  background-color: var(--accent);
+  color: var(--text);
+  border-radius: calc(var(--border-radius) / 2);
+  margin-block-start: 1.5rem;
+  cursor: pointer;
+  transition: var(--transition-duration) var(--transition-timing);
+} 
+button:hover {
+  background-color: var(--accent-border);
+  scale: 1.05;
+} 

@@ -8,16 +8,14 @@ import { useNeoData } from '../../context/NeoDataContext';
 import Settings from '../Settings/Settings';
 import FilterOptions from '../FilterOptions/FilterOptions';
 import { useFilterSettings } from '../../context/FilterSettingsContext';
-import Stats from 'stats.js';
 
 CameraControls.install({ THREE: THREE });
 
 const SpaceCanvas = ({ setTooltipVisible }) => {
-  const { filteredNeoData, neoData, setSelectedNeoData, selectedNeoData } = useNeoData();
-  const { filterVisible, setFilterVisible } = useFilterSettings();
+  const { filteredNeoData, setSelectedNeoData, selectedNeoData } = useNeoData();
+  const { filterVisible } = useFilterSettings();
 
   const canvasRef = useRef(null);
-  const statsRef = useRef(null);
   const [scene, setScene] = useState(null);
   const [camera, setCamera] = useState(null);
   const [renderer, setRenderer] = useState(null);
@@ -30,13 +28,13 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     const starCount = 20000; 
     const starGeometry = new THREE.BufferGeometry();
     
-    // Colores definidos
+    // colores definidos para las estrellas
     const colors = [0xadd8e6, 0xffd6cb, 0x60b7f0, 0xbd9b9b];
     
     const positions = new Float32Array(starCount * 3);
     
     for (let i = 0; i < starCount; i++) {
-      // Posición aleatoria de las estrellas
+      // posición aleatoria de las estrellas
       positions[i * 3] = (Math.random() - 0.5) * 100000;
       positions[i * 3 + 1] = (Math.random() - 0.5) * 100000; 
       positions[i * 3 + 2] = (Math.random() - 0.5) * 100000; 
@@ -44,23 +42,22 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     
     starGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     
-    // Crear materiales para cada color
+    // crear materiales para cada color
     const materials = colors.map(color => new THREE.PointsMaterial({
       color: color, 
       size: Math.floor(Math.random() * 40), 
     }));
   
-    // Crear los puntos para cada color y agregarlos a la escena
+    // crear puntos para cada color y agregarlos a la escena
     const stars = new THREE.Group();
     
     for (let i = 0; i < colors.length; i++) {
-      const colorStarCount = starCount / colors.length;  // División uniforme entre los colores
+      const colorStarCount = starCount / colors.length;  
       const colorPositions = new Float32Array(colorStarCount * 3);
       
       for (let j = 0; j < colorStarCount; j++) {
         const index = i * colorStarCount + j;
         
-        // Copiar las posiciones de las estrellas
         colorPositions[j * 3] = positions[index * 3];
         colorPositions[j * 3 + 1] = positions[index * 3 + 1];
         colorPositions[j * 3 + 2] = positions[index * 3 + 2];
@@ -98,7 +95,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     labelRenderer.domElement.style.pointerEvents = 'none';
     canvasRef.current.appendChild(labelRenderer.domElement);
 
-    // Configurar CameraControls
+    // configurar CameraControls para mover la cámara por la escena
     const cameraControls = new CameraControls(camera, renderer.domElement);
     cameraControls.infinityDolly = true;
     cameraControls.dollyToCursor = true;
@@ -107,7 +104,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     cameraControls.setTarget(0, 0, 0);
     cameraControls.updateCameraUp(new THREE.Vector3(0, 1, 0));
 
-    // Cargar texturas para la Tierra
+    // texturas para la Tierra (planetpixelemporium.com)
     const earthGroup = new THREE.Group();
     earthGroup.rotation.z = -23.4 * Math.PI / 180;
     scene.add(earthGroup);
@@ -322,9 +319,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     if (selectedNeoData) {
       setSelectedNeoData({...selectedNeoData});
       setTooltipVisible(true);
-    } else {
-      console.log('No se encontró información para el NEO seleccionado.');
-    }
+    } 
   };
 
  useEffect(() => {
@@ -334,26 +329,11 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
   }, [selectedNeoData]);
 
   useEffect(() => {
-    const stats = new Stats();
-    stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    stats.dom.style.position = 'absolute';
-    stats.dom.style.top = '0px';
-    stats.dom.style.left = '0px';
-    document.body.appendChild(stats.dom);
-    statsRef.current = stats;
-
-    return () => {
-      document.body.removeChild(stats.dom);
-    };
-  }, []);
-
-  useEffect(() => {
     if (renderer && scene && camera && labelRenderer) {
       const clock = new THREE.Clock();
       let animationId;
   
       const animate = () => {
-        statsRef.current.begin();
         const delta = clock.getDelta();
         cameraControls.update(delta);
         renderer.render(scene, camera);
@@ -366,7 +346,6 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
             child.visible = distance <= 1000;
           }
         });
-        statsRef.current.end();
         animationId = requestAnimationFrame(animate);
       };
       animate();

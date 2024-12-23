@@ -11,8 +11,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-          <Header/>
+      <body suppressHydrationWarning={true}>
+          <Header />
           <FilterSettingsProvider>
           <NeoDataProvider>
                 {children}

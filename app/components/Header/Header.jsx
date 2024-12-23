@@ -54,7 +54,8 @@ const Header = () => {
           </div>
         </div>
         <p>
-          Experimenta en un entorno tridimensional interactivo donde podrás conocer sus trayectorias y explorar datos fascinantes sobre cada uno de ellos.
+          Experimenta en un entorno tridimensional interactivo donde podrás explorar datos de Objetos Cercanos a la Tierra (NEOs).
+          Navega entre estos cuerpos celestes y visualiza datos detallados sobre su tamaño, trayectoria y proximidad a nuestro planeta
         </p>
         {
           isModalOpen && <InfoModalSlider /> //evitar que se muestre el modal si no está cargado completamente
