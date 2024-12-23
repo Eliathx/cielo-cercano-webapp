@@ -1,0 +1,37 @@
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+.settings svg {
+  display: block;
+}
+.settings > section {
+  padding: var(--padding-small);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(var(--blur));
+  z-index: var(--z-index);
+  cursor: pointer;
+  transition: background-color var(--transition-duration) var(--transition-timing);
+}
+
+.settingsZoom {
+  display: flex;
+  gap: var(--gap-large);
+  flex-direction: column;
+}
+
+.settingsZoom > div:last-child {
+  padding-top: var(--padding-large);
+  border-top: var(--secondary) 1px solid;
+}
+
+.settings > section:hover {
+  background-color: var(--accent);
+  border: 1px solid var(--accent-border);
+}

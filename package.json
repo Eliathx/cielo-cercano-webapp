@@ -1,0 +1,26 @@
+{
+  "name": "nasa-api-test",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^6.2.1",
+    "axios": "^1.7.9",
+    "camera-controls": "^2.9.0",
+    "dotenv": "^16.4.7",
+    "next": "15.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
+    "stats.js": "^0.17.0",
+    "three": "^0.171.0"
+  }
+}
