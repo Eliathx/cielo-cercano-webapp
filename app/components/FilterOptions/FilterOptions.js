@@ -23,6 +23,11 @@ const FilterSlider = ({ label, value, onChange, min, max, step, valueLabelFormat
   </>
 );
 
+const CloseButton = () => {
+  const {setFilterVisible } = useFilterSettings();
+  return <svg width="24px" style={{cursor:"pointer"}} onClick={()=>setFilterVisible(false)} height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="currentColor"><path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+};
+
 export default function FilterOptions() {
   const { neoData, applyFilters } = useNeoData();
   const { filters, setFilters } = useFilterSettings();
@@ -61,7 +66,6 @@ export default function FilterOptions() {
         ? [Math.min(newValue[0], range[1] - minStep), newValue[1]]
         : [newValue[0], Math.max(newValue[1], range[0] + minStep)]
       : newValue;
-
     setLocalFilters(prev => ({ ...prev, [key]: clampedValue }));
   };
 
@@ -82,8 +86,10 @@ export default function FilterOptions() {
 
   return (
     <div className={styles.neoFilter}>
-      <h2>Aplicar filtros</h2>
-
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h2>Aplicar filtros</h2>
+        <CloseButton/> 
+       </div>
       <FilterSlider
         label="Distancia de la Tierra (km)"
         value={localFilters.missDistance}

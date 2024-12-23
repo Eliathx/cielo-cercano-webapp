@@ -9,7 +9,7 @@
 .settings svg {
   display: block;
 }
-.settings > section {
+.settings > section, .settingsZoom > section {
   padding: var(--padding-small);
   background-color: var(--background-color);
   border: 1px solid var(--border-color);
@@ -20,18 +20,20 @@
   transition: background-color var(--transition-duration) var(--transition-timing);
 }
 
-.settingsZoom {
-  display: flex;
-  gap: var(--gap-large);
-  flex-direction: column;
+.settingsZoom > section {
+  padding: var(--padding-small);
 }
 
-.settingsZoom > div:last-child {
-  padding-top: var(--padding-large);
+.settingsZoom > section:first-child {
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.settingsZoom > section:last-child {
   border-top: var(--secondary) 1px solid;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
 }
 
-.settings > section:hover {
+.settings > section:hover, .settingsZoom > section:hover {
   background-color: var(--accent);
   border: 1px solid var(--accent-border);
 }

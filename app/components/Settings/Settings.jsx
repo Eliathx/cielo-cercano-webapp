@@ -2,9 +2,9 @@ import styles from "./Settings.module.css";
 import { useNeoData } from "../../context/NeoDataContext";
 import { useFilterSettings } from "@/app/context/FilterSettingsContext";
 
-const Settings = ({setTooltipVisible, zoomIn, zoomOut}) => {
+const Settings = ({setTooltipVisible, zoomIn, zoomOut, resetCamera}) => {
 
-  const { filteredNeoData, neoData, setSelectedNeoData} = useNeoData();
+  const { filteredNeoData, setSelectedNeoData} = useNeoData();
   const { filterVisible, setFilterVisible } = useFilterSettings();
 
 
@@ -42,8 +42,8 @@ const Settings = ({setTooltipVisible, zoomIn, zoomOut}) => {
           </path>
         </svg>
       </section>
-      <section className={styles.settingsZoom}>
-        <div onClick={zoomIn}>
+      <div className={styles.settingsZoom}>
+        <section onClick={zoomIn}>
           <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
             <g
               fill="none"
@@ -62,8 +62,8 @@ const Settings = ({setTooltipVisible, zoomIn, zoomOut}) => {
               </path>
             </g>
           </svg>
-        </div>
-        <div onClick={zoomOut}> 
+        </section>
+        <section onClick={zoomOut}> 
           <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
             <path
               fill="none"
@@ -78,8 +78,8 @@ const Settings = ({setTooltipVisible, zoomIn, zoomOut}) => {
               <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="16;0" />
             </path>
           </svg>
-        </div>
-      </section>
+        </section>
+      </div>
       <section onClick={()=>{handleFullscreen()}} >
         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
           <g
@@ -106,7 +106,7 @@ const Settings = ({setTooltipVisible, zoomIn, zoomOut}) => {
           </g>
         </svg>
       </section>
-      <section onClick={()=>{}}>
+      <section onClick={()=>{resetCamera()}}>
         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="currentColor" d="M21 10q-.425 0-.712-.288T20 9V7h-2q-.425 0-.712-.288T17 6t.288-.712T18 5h2q.825 0 1.413.588T22 7v2q0 .425-.288.713T21 10M3 10q-.425 0-.712-.288T2 9V7q0-.825.588-1.412T4 5h2q.425 0 .713.288T7 6t-.288.713T6 7H4v2q0 .425-.288.713T3 10m15 9q-.425 0-.712-.288T17 18t.288-.712T18 17h2v-2q0-.425.288-.712T21 14t.713.288T22 15v2q0 .825-.587 1.413T20 19zM4 19q-.825 0-1.412-.587T2 17v-2q0-.425.288-.712T3 14t.713.288T4 15v2h2q.425 0 .713.288T7 18t-.288.713T6 19z"></path></svg>
       </section>
       <section onClick={()=>{

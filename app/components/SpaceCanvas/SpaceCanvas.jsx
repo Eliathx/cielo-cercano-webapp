@@ -76,15 +76,13 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     scene.add(stars);
   };
   
-  
   const textureLoader = new THREE.TextureLoader();
 
   useEffect(() => {
     const scene = new THREE.Scene();
 
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100000);
-    camera.position.set(840, 600, 500);
-
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 40000);
+    camera.position.set(640, 200, 600);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(2);
@@ -104,8 +102,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     const cameraControls = new CameraControls(camera, renderer.domElement);
     cameraControls.infinityDolly = true;
     cameraControls.dollyToCursor = true;
-    cameraControls.minDistance = 500;
-		cameraControls.maxDistance = 600;
+
     cameraControls.maxPolarAngle = Math.PI / 2;
     cameraControls.setTarget(0, 0, 0);
     cameraControls.updateCameraUp(new THREE.Vector3(0, 1, 0));
@@ -366,7 +363,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
           
           if (child instanceof CSS2DObject) {
             const distance = camera.position.distanceTo(child.position);
-            child.visible = distance <= 1500;
+            child.visible = distance <= 1000;
           }
         });
         statsRef.current.end();
@@ -388,16 +385,51 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
   };
 
   const zoomIn = () => {
-    cameraControls.dolly(50, true);
+    cameraControls.dolly(20, true);
   };
 
   const zoomOut = () => {
-    cameraControls.dolly(-10, true);
+    cameraControls.dolly(-20, true);
   };
 
+  const resetCamera = () => {
+    if (!camera || !cameraControls) return;
+  
+    const targetPosition = new THREE.Vector3(640, 200, 600);
+    const lookAtTarget = new THREE.Vector3(0, 0, 0);
+  
+    const startPosition = camera.position.clone();
+    const startLookAt = cameraControls.getTarget(new THREE.Vector3());
+    const duration = 1.5;
+    const startTime = performance.now();
+  
+    const animate = () => {
+      const elapsedTime = (performance.now() - startTime) / 1000;
+      const progress = Math.min(elapsedTime / duration, 1);
+  
+      // interpolación de posición y orientación
+      camera.position.lerpVectors(startPosition, targetPosition, progress);
+      const currentLookAt = startLookAt.clone().lerp(lookAtTarget, progress);
+      cameraControls.setLookAt(
+        camera.position.x,
+        camera.position.y,
+        camera.position.z,
+        currentLookAt.x,
+        currentLookAt.y,
+        currentLookAt.z
+      );
+  
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+  
+    animate();
+  };
+  
   return (
     <>
-      <Settings setTooltipVisible={setTooltipVisible} zoomIn={zoomIn} zoomOut={zoomOut} />
+      <Settings setTooltipVisible={setTooltipVisible} zoomIn={zoomIn} zoomOut={zoomOut} resetCamera={resetCamera} />
       <div ref={canvasRef} className={styles.canvas} onClick={handleMouseClick} onMouseMove={onMouseMove} />
       {filterVisible ? <FilterOptions/> : null}
     </>
