@@ -17,8 +17,8 @@
     "dotenv": "^16.4.7",
     "iconoir-react": "^7.10.1",
     "next": "15.1.2",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "react-slick": "^0.30.3",
     "slick-carousel": "^1.8.1",
     "three": "^0.171.0"
