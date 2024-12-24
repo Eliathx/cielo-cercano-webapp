@@ -45,7 +45,7 @@ const SpaceCanvas = ({ setTooltipVisible }) => {
     // crear materiales para cada color
     const materials = colors.map(color => new THREE.PointsMaterial({
       color: color, 
-      size: Math.floor(Math.random() * 40), 
+      size: Math.floor(Math.random() * 30), 
     }));
   
     // crear puntos para cada color y agregarlos a la escena

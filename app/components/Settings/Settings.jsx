@@ -140,9 +140,9 @@ const Settings = ({ setTooltipVisible, zoomIn, zoomOut, resetCamera }) => {
       <section
         onClick={() => {
           resetCamera();
-          setTooltipText("Reiniciar cámara");
+          setTooltipText("Centrar cámara");
         }}
-        onMouseEnter={() => setTooltipText("Reiniciar cámara")}
+        onMouseEnter={() => setTooltipText("Centrar cámara")}
         onMouseLeave={() => setTooltipText("")}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">

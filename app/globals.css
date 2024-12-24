@@ -136,6 +136,7 @@ button {
   margin-block-start: 1.5rem;
   cursor: pointer;
   transition: var(--transition-duration) var(--transition-timing);
+  text-align: center;
 } 
 button:hover {
   background-color: var(--accent-border);

@@ -12,7 +12,7 @@
   backdrop-filter: blur(var(--blur));
   z-index: var(--z-index);
   transition: opacity var(--transition-duration) var(--transition-timing);
-  max-height: 60vh;
+  max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -21,7 +21,7 @@
 .checkbox {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--text);
   border-radius: 4px;
 }
 
@@ -29,18 +29,7 @@
   font-size: 1rem;
 }
 
-.applyButton {
-  margin-top: 16px;
-  padding: 10px 20px;
-  background-color: var(--accent);
-  border: 1px solid var(--accent-border);
-  color: var(--text);
-  border-radius: 4px;
-  cursor: pointer;
+.neoFilter h3{
   font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-.applyButton:hover {
-  background-color: var(--accent-border);
+  font-weight: normal;
 }
